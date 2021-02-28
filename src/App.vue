@@ -6,15 +6,25 @@
         height="48px"
         tile
     >
+      <v-navigation-drawer
+          app
+          temporary
+          v-model="drawer"
+      >
+
+      </v-navigation-drawer>
       <v-toolbar dense dark color="primary">
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title>Ad Application</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text>Link One</v-btn>
+          <v-btn text>
+            <v-icon dark left>mdi-bug</v-icon>
+            Link One
+          </v-btn>
         </v-toolbar-items>
 
       </v-toolbar>
@@ -28,7 +38,13 @@
 
 <script>
 
-export default {};
+export default {
+  data () {
+    return {
+      drawer: false
+    }
+  }
+};
 </script>
 
 <style>
