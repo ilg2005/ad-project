@@ -5,7 +5,7 @@
         <h1 class="display-1">Login</h1>
       </v-card-title>
       <v-card-text class="mb-3">
-        <v-form ref="form" v-model="valid" validation>
+        <v-form ref="form" v-model="valid">
           <v-text-field
               label="Username"
               v-model="username"
