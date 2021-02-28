@@ -2,7 +2,7 @@
   <v-container>
     <v-card width="50%" class="mx-auto mt-5">
       <v-card-title class="pb-5">
-        <h1>Login</h1>
+        <h1 class="display-1">Login</h1>
       </v-card-title>
       <v-card-text>
         <v-form>
