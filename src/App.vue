@@ -38,7 +38,7 @@
       </v-navigation-drawer>
 
       <v-toolbar dense dark color="primary">
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
 
         <v-toolbar-title>Ad Application</v-toolbar-title>
 
