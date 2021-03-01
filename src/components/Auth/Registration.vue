@@ -16,6 +16,7 @@
           />
           <v-text-field
               label="Email"
+              type="email"
               v-model="email"
               prepend-icon="mdi-at"
               :rules="emailRules"
