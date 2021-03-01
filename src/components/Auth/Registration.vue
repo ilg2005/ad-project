@@ -67,7 +67,7 @@
 export default {
   data() {
     return {
-      valid: true,
+      valid: false,
       username: '',
       usernameRules: [
         value => !!value || 'Username is required',

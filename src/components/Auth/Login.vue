@@ -33,7 +33,7 @@
             @click="onLogin"
             :disabled="!valid"
         >
-          Login
+          Submit
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      valid: true,
+      valid: false,
       username: '',
       password: '',
       showPassword: false
@@ -56,7 +56,6 @@ export default {
       if (this.$refs.loginForm.validate()) {
         const user = {
           name: this.username,
-          pwd: this.password
         }
 
         console.log(user)
