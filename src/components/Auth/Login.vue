@@ -5,12 +5,12 @@
         <h1 class="display-1">Login</h1>
       </v-card-title>
       <v-card-text class="mb-3">
-        <v-form ref="form" v-model="valid">
+        <v-form ref="loginForm" v-model="valid" lazy-validation>
           <v-text-field
               label="Username"
               v-model="username"
               prepend-icon="mdi-account-circle"
-              :rules="[v => !!v || 'Item is required']"
+              :rules="[v => !!v || 'Username is required']"
               required
           />
           <v-text-field
@@ -20,7 +20,7 @@
               prepend-icon="mdi-lock"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="showPassword = !showPassword"
-              :rules="[v => !!v || 'Item is required']"
+              :rules="[v => !!v || 'Password is required']"
               required
           />
         </v-form>
@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      valid: false,
+      valid: true,
       username: '',
       password: '',
       showPassword: false
@@ -52,11 +52,15 @@ export default {
   },
   methods: {
     onLogin () {
-      const user = {
-        name: this.username,
-        pwd: this.password
+
+      if (this.$refs.loginForm.validate()) {
+        const user = {
+          name: this.username,
+          pwd: this.password
+        }
+
+        console.log(user)
       }
-      console.log(user)
     }
   }
 }
