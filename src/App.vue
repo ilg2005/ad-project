@@ -40,7 +40,11 @@
       <v-toolbar dense dark color="primary">
         <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Ad Application</v-toolbar-title>
+        <v-toolbar-title>
+          <router-link to="/" custom v-slot="{ navigate }">
+            <span @click="navigate" @keypress.enter="navigate" role="link" class="pointer">Ad Application</span>
+           </router-link>
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -83,6 +87,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+  .pointer {
+    cursor: pointer;
+  }
 </style>
