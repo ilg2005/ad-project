@@ -41,7 +41,6 @@
                         <v-btn
                             class="primary elevation-2 mx-auto"
                             dark
-                            outlined
                             small
                             width="80px"
                             :to="'/ad/' + ad.id"
