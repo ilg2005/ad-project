@@ -28,7 +28,7 @@
           ></v-file-input>
           <v-row justify="center" class="my-3">
             <v-img
-                src="https://cdn.vuetifyjs.com/images/carousel/planet.jpg"
+                :src="imageSrc"
                 lazy-src="https://picsum.photos/id/11/100/60"
                 max-height="200"
             >
@@ -76,7 +76,8 @@ export default {
       valid: false,
       title: '',
       description: '',
-      switch1: true
+      switch1: true,
+      imageSrc: "https://c0.klipartz.com/pngpicture/351/526/gratis-png-vuejs-amsterdam-2019-frontend-developer-amor-vue-js-graphql-javascript-frontend.png"
     }
   },
   methods: {
@@ -84,11 +85,15 @@ export default {
 
       if (this.$refs.newAdForm.validate()) {
         const newAd = {
+          id: "temp" + Math.floor(Math.random() * 10),
           title: this.title,
-          description: this.description
+          description: this.description,
+          promo: this.switch1,
+          src: this.imageSrc
         }
-
+        this.$store.dispatch('createAd', newAd)
         console.log(newAd)
+        this.$router.push("list")
       }
     }
   }

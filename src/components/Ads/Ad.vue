@@ -13,17 +13,16 @@
           <v-img
               class="white--text align-end"
               height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+              :src="currentAd.src"
           >
           </v-img>
 
           <v-card-title class="pb-0">
-            Number 10
+            {{ currentAd.title }}
           </v-card-title>
 
           <v-card-text class="text--primary">
-            <div>Whitehaven Beach</div>
-            <div>Whitsunday Island, Whitsunday Islands</div>
+            <div>{{ currentAd.description }}</div>
           </v-card-text>
 
           <v-card-actions>
@@ -48,8 +47,11 @@
 
 <script>
 export default {
-  data() {
-    return {}
+  props: ['id'],
+  computed: {
+    currentAd () {
+      return this.$store.getters.ads.find(ad => ad.id === this.$props.id)
+    }
   }
 }
 </script>
