@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-carousel>
         <v-carousel-item
-            v-for="ad in ads"
+            v-for="ad in promoAds"
             :key="ad.id"
             :src="ad.src"
             reverse-transition="fade-transition"
@@ -73,39 +73,13 @@
 
 <script>
 export default {
-  data() {
-    return {
-      ads: [
-        {
-          id: '1',
-          title: 'First ad',
-          description: 'First description',
-          promo: false,
-          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-        },
-        {
-          id: '2',
-          title: 'Second ad',
-          description: 'Second description',
-          promo: true,
-          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-        },
-        {
-          id: '3',
-          title: 'Third ad',
-          description: 'Third description',
-          promo: true,
-          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-        },
-        {
-          id: '4',
-          title: 'Fourth ad',
-          description: 'Fourth description',
-          promo: false,
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-        },
-      ],
-    }
+  computed: {
+    promoAds () {
+      return this.$store.getters.promoAds
+    },
+    ads () {
+      return this.$store.getters.ads
+    },
   }
 }
 </script>
