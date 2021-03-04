@@ -13,7 +13,7 @@ export default {
         }
     },
     getters: {
-        user (state) {
+        users (state) {
             return state.users
         }
     }
