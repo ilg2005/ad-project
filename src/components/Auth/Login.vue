@@ -7,10 +7,12 @@
       <v-card-text class="mb-3">
         <v-form ref="loginForm" v-model="valid" lazy-validation>
           <v-text-field
-              label="Username"
-              v-model="username"
-              prepend-icon="mdi-account-circle"
-              :rules="[v => !!v || 'Username is required']"
+              label="Email"
+              type="email"
+              v-model="email"
+              prepend-icon="mdi-at"
+              :rules="emailRules"
+              validate-on-blur
               required
           />
           <v-text-field
@@ -45,7 +47,14 @@ export default {
   data() {
     return {
       valid: false,
-      username: '',
+      email: '',
+      emailRules: [
+        value => !!value || 'Email is required',
+        value => value.indexOf('@') !== 0 || 'Email should have a username',
+        value => value.includes('@') || 'Email should include an @ symbol',
+        value => value.indexOf('.') - value.indexOf('@') > 1 || 'Email should contain a valid domain',
+        value => value.indexOf('.') <= value.length - 3 || 'Email should contain a valid domain extension'
+      ],
       password: '',
       showPassword: false
     }
@@ -55,7 +64,8 @@ export default {
 
       if (this.$refs.loginForm.validate()) {
         const user = {
-          name: this.username,
+          email: this.email,
+          password: this.password
         }
 
         console.log(user)

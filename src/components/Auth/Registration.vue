@@ -101,10 +101,13 @@ export default {
       if (this.$refs.signUpForm.validate()) {
         const user = {
           name: this.username,
-          email: this.email
+          email: this.email,
+          password: this.password
         }
 
+        this.$store.dispatch('registerUser', user)
         console.log(user)
+        this.$router.push("login")
       }
     }
   }
