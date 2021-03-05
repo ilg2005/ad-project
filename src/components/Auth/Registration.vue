@@ -54,7 +54,8 @@
             color="info"
             class="v-btn--block"
             @click="onSubmit"
-            :disabled="!valid"
+            :loading="loading"
+            :disabled="!valid || loading"
         >
           Submit
         </v-btn>
@@ -96,6 +97,11 @@ export default {
       ]
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   methods: {
     onSubmit() {
       if (this.$refs.signUpForm.validate()) {
@@ -106,8 +112,11 @@ export default {
         }
 
         this.$store.dispatch('registerUser', user)
+        .then(() => {
+          this.$router.push("login")
+        })
+        .catch(err => console.log(err))
         console.log(user)
-        this.$router.push("login")
       }
     }
   }
