@@ -114,9 +114,10 @@ export default {
         this.$store.dispatch('registerUser', user)
         .then(() => {
           this.$router.push("login")
+          console.log('registration successful')
         })
         .catch(err => console.log(err))
-        console.log(user)
+
       }
     }
   }

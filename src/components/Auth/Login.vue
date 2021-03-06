@@ -33,7 +33,8 @@
             color="info"
             class="v-btn--block"
             @click="onLogin"
-            :disabled="!valid"
+            :loading="loading"
+            :disabled="!valid || loading"
         >
           Submit
         </v-btn>
@@ -59,6 +60,11 @@ export default {
       showPassword: false
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   methods: {
     onLogin () {
 
@@ -68,8 +74,14 @@ export default {
           password: this.password
         }
 
-        console.log(user)
-      }
+        this.$store.dispatch('loginUser', user)
+        .then(() => {
+          this.$router.push('/')
+          console.log('login successful')
+        })
+          .catch(err => console.log(err))
+        }
+
     }
   }
 }
