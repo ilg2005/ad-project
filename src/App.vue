@@ -64,7 +64,28 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+    <div v-if="error">
+    <v-snackbar
+        v-model="snackbar"
+        :multi-line="true"
+        :timeout="-1"
+        color="error"
+        dark
+    >
+      {{ error }}
 
+      <template v-slot:action="{ attrs }">
+        <v-btn
+            dark
+            text
+            v-bind="attrs"
+            @click="closeError"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    </div>
   </v-app>
 </template>
 
@@ -73,6 +94,7 @@
 export default {
   data() {
     return {
+      snackbar: true,
       drawer: false,
       selectedItem: null,
       links: [
@@ -82,6 +104,16 @@ export default {
         {text: 'New ad', icon: 'mdi-file-plus', url: '/new'},
         {text: 'My ads', icon: 'mdi-format-list-bulleted', url: '/list'},
       ],
+    }
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  methods: {
+    closeError () {
+      this.$store.dispatch('clearError')
     }
   }
 };

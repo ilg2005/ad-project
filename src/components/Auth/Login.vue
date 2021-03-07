@@ -79,7 +79,7 @@ export default {
           this.$router.push('/')
           console.log('login successful')
         })
-          .catch(err => console.log(err))
+          .catch(() => {})
         }
 
     }

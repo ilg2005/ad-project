@@ -116,7 +116,7 @@ export default {
           this.$router.push("login")
           console.log('registration successful')
         })
-        .catch(err => console.log(err))
+        .catch(() => {})
 
       }
     }
