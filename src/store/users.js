@@ -9,10 +9,17 @@ class User {
 export default {
     state: {
         users: [],
+        isLogged: false
     },
     mutations: {
         registerUser(state, payload) {
             state.users.push(payload)
+        },
+        onSuccessfulLogin (state) {
+            state.isLogged = true
+        },
+        onLogout (state) {
+            state.isLogged = false
         }
     },
     actions: {
@@ -37,16 +44,23 @@ export default {
             try {
                await firebase.auth().signInWithEmailAndPassword(email, password)
                 commit('setLoading', false)
+                commit('onSuccessfulLogin')
             } catch (error) {
                 commit('setLoading', false)
                 commit('setError', error.message)
                 throw error
             }
+        },
+        onUserLogout ({commit}) {
+            commit('onLogout')
         }
     },
         getters: {
             users(state) {
                 return state.users
+            },
+            isLoggedIn (state) {
+                return state.isLogged
             }
         }
     }

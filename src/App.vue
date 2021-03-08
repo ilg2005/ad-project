@@ -57,6 +57,14 @@
             <v-icon dark left>{{link.icon}}</v-icon>
             {{link.text}}
           </v-btn>
+          <v-btn
+              v-if="isUserLoggedIn"
+              text
+              @click="onLogout"
+          >
+            <v-icon dark left>mdi-logout</v-icon>
+            Logout
+          </v-btn>
         </v-toolbar-items>
 
       </v-toolbar>
@@ -97,24 +105,39 @@ export default {
       snackbar: true,
       drawer: false,
       selectedItem: null,
-      links: [
-        {text: 'Login', icon: 'mdi-lock', url: '/login'},
-        {text: 'Registration', icon: 'mdi-face', url: '/registration'},
-        {text: 'Orders', icon: 'mdi-bookmark-outline', url: '/orders'},
-        {text: 'New ad', icon: 'mdi-file-plus', url: '/new'},
-        {text: 'My ads', icon: 'mdi-format-list-bulleted', url: '/list'},
-        {text: 'Logout', icon: 'mdi-logout', url: '/'},
-      ],
     }
   },
   computed: {
     error () {
       return this.$store.getters.error
+    },
+    isUserLoggedIn () {
+      return this.$store.getters.isLoggedIn
+    },
+    links () {
+      if (this.$store.getters.isLoggedIn) {
+        return [
+          {text: 'Orders', icon: 'mdi-bookmark-outline', url: '/orders'},
+          {text: 'New ad', icon: 'mdi-file-plus', url: '/new'},
+          {text: 'My ads', icon: 'mdi-format-list-bulleted', url: '/list'},
+        ]
+      } else {
+        return [
+          {text: 'Login', icon: 'mdi-lock', url: '/login'},
+          {text: 'Registration', icon: 'mdi-face', url: '/registration'},
+        ]
+      }
     }
   },
   methods: {
     closeError () {
       this.$store.dispatch('clearError')
+    },
+    onLogout () {
+      this.$store.dispatch('onUserLogout')
+      if (this.$route.name !== 'home') {
+        this.$router.push('/')
+      }
     }
   }
 };
