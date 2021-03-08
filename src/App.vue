@@ -103,6 +103,7 @@ export default {
         {text: 'Orders', icon: 'mdi-bookmark-outline', url: '/orders'},
         {text: 'New ad', icon: 'mdi-file-plus', url: '/new'},
         {text: 'My ads', icon: 'mdi-format-list-bulleted', url: '/list'},
+        {text: 'Logout', icon: 'mdi-logout', url: '/'},
       ],
     }
   },
