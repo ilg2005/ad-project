@@ -20,6 +20,8 @@ export default {
         },
         onLogout (state) {
             state.isLogged = false
+            firebase.auth().signOut()
+                .then(() => {})
         }
     },
     actions: {

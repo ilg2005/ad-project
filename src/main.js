@@ -16,6 +16,11 @@ firebase.initializeApp({
   appId: "1:206254392371:web:ceb87cb6562c6a3463cf46"
 });
 
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.commit("onSuccessfulLogin");
+  }
+});
 
 new Vue({
   vuetify,
