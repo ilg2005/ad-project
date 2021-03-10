@@ -9,19 +9,22 @@ class User {
 export default {
     state: {
         users: [],
-        isLogged: false
+        isLogged: false,
+        currentUser: null
     },
     mutations: {
         registerUser(state, payload) {
             state.users.push(payload)
         },
-        onSuccessfulLogin (state) {
+        onSuccessfulLogin (state, payload) {
             state.isLogged = true
+            state.currentUser = payload
         },
         onLogout (state) {
             state.isLogged = false
             firebase.auth().signOut()
                 .then(() => {})
+            state.currentUser = null
         }
     },
     actions: {
@@ -46,7 +49,7 @@ export default {
             try {
                await firebase.auth().signInWithEmailAndPassword(email, password)
                 commit('setLoading', false)
-                commit('onSuccessfulLogin')
+                commit('onSuccessfulLogin', firebase.auth().currentUser)
             } catch (error) {
                 commit('setLoading', false)
                 commit('setError', error.message)
@@ -63,6 +66,9 @@ export default {
             },
             isLoggedIn (state) {
                 return state.isLogged
+            },
+            currentUser(state) {
+                return state.currentUser
             }
         }
     }
