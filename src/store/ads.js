@@ -64,7 +64,7 @@ export default {
                     payload.promo,
                     payload.id
                 )
-                const ad = await firebase.database().ref('itc-ads-d6055-default-rtdb').push(newAd)
+                const ad = await firebase.database().ref('ads').push(newAd)
                 console.log(ad)
                 commit('createAd', {
                     ...newAd,
