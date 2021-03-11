@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <v-container fluid>
       <v-carousel>
         <v-carousel-item
@@ -69,6 +69,20 @@
       </v-row>
     </v-container>
   </div>
+  <div v-else>
+    <v-container>
+      <v-row>
+        <v-col class="text-center pt-15">
+          <v-progress-circular
+              :size="100"
+              :width="7"
+              color="purple"
+              indeterminate
+          ></v-progress-circular>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -80,6 +94,9 @@ export default {
     ads () {
       return this.$store.getters.ads
     },
+    loading () {
+      return this.$store.getters.loading
+    }
   }
 }
 </script>

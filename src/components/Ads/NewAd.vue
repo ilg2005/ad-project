@@ -25,11 +25,13 @@
               placeholder="Pick an image"
               prepend-icon="mdi-camera"
               label="Ad image"
+              show-size
+              @change.native="onFileChange"
           ></v-file-input>
           <v-row justify="center" class="my-3">
             <v-img
+                v-if="this.valid"
                 :src="imageSrc"
-                lazy-src="https://picsum.photos/id/11/100/60"
                 max-height="200"
             >
               <template v-slot:placeholder>
@@ -60,7 +62,7 @@
             color="info"
             class="v-btn--block"
             @click="onCreate"
-            :disabled="!valid"
+            :disabled="(!valid && !image) || loading"
         >
           Create
         </v-btn>
@@ -77,19 +79,36 @@ export default {
       title: '',
       description: '',
       switch1: true,
-      imageSrc: "https://c0.klipartz.com/pngpicture/351/526/gratis-png-vuejs-amsterdam-2019-frontend-developer-amor-vue-js-graphql-javascript-frontend.png"
+      imageSrc: '',
+      image: null
+    }
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.loading
     }
   },
   methods: {
-    onCreate () {
+    onFileChange(evt) {
+      this.image = null
+      const file = evt.target.files[0]
 
-      if (this.$refs.newAdForm.validate()) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        this.imageSrc = reader.result
+      }
+      reader.readAsDataURL(file)
+      this.image = file
+    },
+    onCreate() {
+
+      if (this.$refs.newAdForm.validate() && this.image) {
         const newAd = {
           id: "temp" + Math.floor(Math.random() * 10),
           title: this.title,
           description: this.description,
           promo: this.switch1,
-          src: this.imageSrc
+          image: this.image
         }
         this.$store.dispatch('createAd', newAd)
         console.log(newAd)

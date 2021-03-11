@@ -23,6 +23,8 @@ firebase.auth().onAuthStateChanged(user => {
   }
 });
 
+store.dispatch('fetchAds')
+
 new Vue({
   vuetify,
   router,
@@ -30,4 +32,6 @@ new Vue({
   firebase,
   render: h => h(App),
 }).$mount('#app')
+
+
 
