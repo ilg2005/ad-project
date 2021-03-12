@@ -104,7 +104,6 @@ export default {
 
       if (this.$refs.newAdForm.validate() && this.image) {
         const newAd = {
-          id: "temp" + Math.floor(Math.random() * 10),
           title: this.title,
           description: this.description,
           promo: this.switch1,
