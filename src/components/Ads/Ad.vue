@@ -28,7 +28,10 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <EditModal :ad="currentAd"></EditModal>
+            <EditModal
+                :ad="currentAd"
+                v-if="isOwner"
+            ></EditModal>
 
             <v-btn
                 color="success"
@@ -69,6 +72,9 @@ export default {
     },
     loading () {
       return this.$store.getters.loading
+    },
+    isOwner () {
+      return this.$store.getters.currentUser.uid === this.currentAd.ownerId
     }
   }
 }

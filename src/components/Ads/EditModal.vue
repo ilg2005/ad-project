@@ -1,6 +1,8 @@
 <template>
   <v-dialog width="400px" v-model="modal">
-    <template v-slot:activator="{ on, attrs }">
+    <template
+        v-slot:activator="{ on, attrs }"
+    >
       <v-btn
           color="orange"
           v-bind="attrs"

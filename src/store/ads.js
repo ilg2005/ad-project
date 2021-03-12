@@ -1,7 +1,7 @@
 import firebase from "firebase/firebase";
 
 class Ad {
-    constructor (title, description, ownerId, src = '', promo = false, id = null) {
+    constructor(title, description, ownerId, src = '', promo = false, id = null) {
         this.title = title
         this.description = description
         this.ownerId = ownerId
@@ -16,29 +16,32 @@ export default {
         ads: [],
     },
     mutations: {
-        createAd (state, payload) {
-           state.ads.push(payload)
+        createAd(state, payload) {
+            state.ads.push(payload)
         },
-        loadAds (state, payload) {
+        loadAds(state, payload) {
             state.ads = payload
         },
     },
     actions: {
-        async updateAd ({commit}, payload) {
+        async updateAd({commit}, payload) {
             commit('clearError')
+            commit('setLoading', true)
             try {
-                firebase.database().ref('ads').child(payload.id).update({
+                await firebase.database().ref('ads').child(payload.id).update({
                     title: payload.title,
                     description: payload.description
                 })
+                commit('setLoading', false)
             } catch (e) {
+                commit('setLoading', false)
                 commit('setError', e.message)
                 throw e
             }
 
 
         },
-        async createAd ({commit, getters}, payload) {
+        async createAd({commit, getters}, payload) {
             commit('clearError')
             commit('setLoading', true)
 
@@ -75,7 +78,7 @@ export default {
             }
 
         },
-        async fetchAds ({commit}) {
+        async fetchAds({commit}) {
             commit('clearError')
             commit('setLoading', true)
 
@@ -109,16 +112,18 @@ export default {
         }
     },
     getters: {
-        ads (state) {
+        ads(state) {
             return state.ads
         },
-        promoAds (state) {
+        promoAds(state) {
             return state.ads.filter(ad => {
                 return ad.promo
             })
         },
-        myAds (state) {
-            return state.ads
+        myAds(state, getters) {
+            return state.ads.filter(ad => {
+                return ad.ownerId === getters.currentUser.uid
+            })
         }
     }
 }
