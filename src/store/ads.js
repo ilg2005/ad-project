@@ -21,9 +21,23 @@ export default {
         },
         loadAds (state, payload) {
             state.ads = payload
-        }
+        },
     },
     actions: {
+        async updateAd ({commit}, payload) {
+            commit('clearError')
+            try {
+                firebase.database().ref('ads').child(payload.id).update({
+                    title: payload.title,
+                    description: payload.description
+                })
+            } catch (e) {
+                commit('setError', e.message)
+                throw e
+            }
+
+
+        },
         async createAd ({commit, getters}, payload) {
             commit('clearError')
             commit('setLoading', true)

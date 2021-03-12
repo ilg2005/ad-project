@@ -79,6 +79,8 @@ export default {
           description: this.editedDescription,
           id: this.ad.id
         })
+        this.ad.title = this.editedTitle
+        this.ad.description = this.editedDescription
 
         this.modal = false
       }
