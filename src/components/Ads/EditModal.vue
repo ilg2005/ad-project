@@ -68,9 +68,9 @@ export default {
   },
   methods: {
     onCancelModal () {
-      this.dialog = false
       this.editedTitle = this.ad.title
       this.editedDescription = this.ad.description
+      this.modal = false
     },
     onSave () {
       if (this.editedDescription !== '' && this.editedTitle !== '') {
@@ -80,7 +80,7 @@ export default {
           id: this.ad.id
         })
 
-        this.dialog = false
+        this.modal = false
       }
     }
   }
