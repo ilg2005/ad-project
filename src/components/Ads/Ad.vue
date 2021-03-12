@@ -7,6 +7,7 @@
           offset-sm="3"
       >
         <v-card
+            v-if="!loading"
             class="mx-auto"
             max-width="400"
         >
@@ -27,11 +28,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-                color="orange"
-            >
-              Edit
-            </v-btn>
+            <EditModal :ad="currentAd"></EditModal>
 
             <v-btn
                 color="success"
@@ -40,17 +37,38 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        <div v-else>
+          <v-container>
+            <v-row>
+              <v-col class="text-center pt-15">
+                <v-progress-circular
+                    :size="100"
+                    :width="7"
+                    color="purple"
+                    indeterminate
+                ></v-progress-circular>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import EditModal from "@/components/Ads/EditModal";
 export default {
+  components: {
+    EditModal
+  },
   props: ['id'],
   computed: {
     currentAd () {
       return this.$store.getters.ads.find(ad => ad.id === this.$props.id)
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
