@@ -41,7 +41,7 @@ export default {
 
 
         },
-        async createAd({commit}, payload) {
+        async createAd({commit, getters}, payload) {
             commit('clearError')
             commit('setLoading', true)
 
@@ -51,7 +51,7 @@ export default {
                 const newAd = new Ad(
                     payload.title,
                     payload.description,
-                    localStorage.getItem('currentUserId'),
+                    getters.currentUser.uid,
                     '',
                     payload.promo,
                     payload.id
@@ -122,7 +122,7 @@ export default {
         },
         myAds(state) {
             return state.ads.filter(ad => {
-                return ad.ownerId === localStorage.getItem('currentUserId')
+                return ad.ownerId === firebase.auth().currentUser.uid
             })
         }
     }

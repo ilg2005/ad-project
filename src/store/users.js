@@ -1,6 +1,5 @@
 import firebase from "firebase/firebase";
 
-
 class User {
     constructor(id) {
         this.id = id
@@ -24,8 +23,10 @@ export default {
         onLogout (state) {
             state.isLogged = false
             firebase.auth().signOut()
-                .then(() => {})
-            state.currentUser = null
+                .then(() => {
+                    localStorage.setItem('currentUserId', null)
+                    state.currentUser = null
+                })
         }
     },
     actions: {
