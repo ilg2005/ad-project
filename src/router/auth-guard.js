@@ -1,4 +1,4 @@
-import store from '../store'
+import store from '../store/users'
 export default function (to, from, next) {
     if (store.getters.isLoggedIn) {
         next()

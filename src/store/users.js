@@ -1,5 +1,6 @@
 import firebase from "firebase/firebase";
 
+
 class User {
     constructor(id) {
         this.id = id
