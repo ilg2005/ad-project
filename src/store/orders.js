@@ -24,10 +24,10 @@ export default {
         },
     },
     actions: {
-        async createOrder({commit}, {name, phone, adId, ownerId}) {
+        async createOrder({commit}, {name, phone, adId, done = false, ownerId}) {
             commit('clearError')
             try {
-                await firebase.database().ref(`users/${ownerId}`).push({name, phone, adId})
+                await firebase.database().ref(`users/${ownerId}`).push({name, phone, adId, done})
             } catch (e) {
                 commit('setError', e.message)
                 throw e
@@ -62,12 +62,30 @@ export default {
                 commit('setError', e.message)
                 throw e
             }
+        },
+        async markOrderDone({commit, getters}, orderId) {
+            try {
+                commit('clearError')
+                await firebase.database().ref(`users/${getters.currentUser.uid}`).child(orderId).update({
+                    done: true
+                })
+
+            } catch (e) {
+                commit('setError', e.message)
+                throw e
+            }
         }
 
     },
     getters: {
-        orders (state) {
-            return state.orders
+        doneOrders (state) {
+            return state.orders.filter(o => o.done)
+        },
+        notDoneOrders (state) {
+            return state.orders.filter(o => !o.done)
+        },
+        orders (state, getters) {
+            return getters.notDoneOrders.concat(getters.doneOrders)
         }
     }
 }

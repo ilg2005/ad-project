@@ -26,6 +26,7 @@
                       :input-value="active"
                       color="primary"
                       v-model="order.done"
+                      @click="markDone(order)"
                   ></v-checkbox>
                 </v-list-item-action>
 
@@ -75,8 +76,13 @@ export default {
     orders () {
       return this.$store.getters.orders
     },
-    loading() {
+    loading () {
       return this.$store.getters.loading
+    },
+  },
+  methods: {
+    markDone (order) {
+      this.$store.dispatch('markOrderDone', order.id)
     }
   },
   created () {
