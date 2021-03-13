@@ -86,7 +86,7 @@ export default {
     }
   },
   created () {
-    this.currentUserId = this.$store.getters.currentUser.uid
+    this.currentUserId = localStorage.getItem('currentUserId')
     this.$store.dispatch('fetchOrders', this.currentUserId)
   }
 }

@@ -71,7 +71,7 @@ export default {
       return this.$store.getters.loading
     },
     isOwner () {
-      return this.$store.getters.currentUser.uid === this.currentAd.ownerId
+      return localStorage.getItem('currentUserId') === this.currentAd.ownerId
     }
   }
 }

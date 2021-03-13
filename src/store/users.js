@@ -51,6 +51,7 @@ export default {
                await firebase.auth().signInWithEmailAndPassword(email, password)
                 commit('setLoading', false)
                 commit('onSuccessfulLogin', firebase.auth().currentUser)
+                localStorage.setItem('currentUserId', firebase.auth().currentUser.uid)
             } catch (error) {
                 commit('setLoading', false)
                 commit('setError', error.message)

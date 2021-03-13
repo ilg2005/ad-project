@@ -41,7 +41,7 @@ export default {
 
 
         },
-        async createAd({commit, getters}, payload) {
+        async createAd({commit}, payload) {
             commit('clearError')
             commit('setLoading', true)
 
@@ -51,7 +51,7 @@ export default {
                 const newAd = new Ad(
                     payload.title,
                     payload.description,
-                    getters.currentUser.uid,
+                    localStorage.getItem('currentUserId'),
                     '',
                     payload.promo,
                     payload.id
@@ -120,9 +120,9 @@ export default {
                 return ad.promo
             })
         },
-        myAds(state, getters) {
+        myAds(state) {
             return state.ads.filter(ad => {
-                return ad.ownerId === getters.currentUser.uid
+                return ad.ownerId === localStorage.getItem('currentUserId')
             })
         }
     }
