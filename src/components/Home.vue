@@ -39,7 +39,7 @@
             </v-img>
 
             <v-card-subtitle class="pb-0">
-              Number {{ ad.id }}
+              ID {{ ad.id }}
             </v-card-subtitle>
 
             <v-card-text class="text--primary">
