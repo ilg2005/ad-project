@@ -1,3 +1,5 @@
+import firebase from "firebase/firebase";
+
 export default {
     state: {
         orders: []
@@ -8,12 +10,16 @@ export default {
         }
     },
     actions: {
-        async createOrder() {
-            await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve()
-                }, 4000)
-            })
+        async createOrder({commit}, {name, phone, adId, ownerId}) {
+            commit('clearError')
+            try {
+                await firebase.database().ref(`users/${ownerId}`).push({name, phone, adId})
+                commit('setLoading', false)
+            } catch (e) {
+                commit('setError', e.message)
+                throw e
+            }
+
         }
     },
     getters: {

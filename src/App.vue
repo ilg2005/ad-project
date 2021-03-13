@@ -56,7 +56,7 @@
         <v-toolbar-title>
           <router-link to="/" custom v-slot="{ navigate }">
             <span @click="navigate" @keypress.enter="navigate" role="link" class="pointer">Ad Application</span>
-           </router-link>
+          </router-link>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -67,8 +67,8 @@
                  :key="i"
                  :to="link.url"
           >
-            <v-icon dark left>{{link.icon}}</v-icon>
-            {{link.text}}
+            <v-icon dark left>{{ link.icon }}</v-icon>
+            {{ link.text }}
           </v-btn>
           <v-btn
               v-if="isUserLoggedIn"
@@ -86,26 +86,26 @@
       <router-view></router-view>
     </v-main>
     <div v-if="error">
-    <v-snackbar
-        v-model="snackbar"
-        :multi-line="true"
-        :timeout="-1"
-        color="error"
-        dark
-    >
-      {{ error }}
+      <v-snackbar
+          v-model="snackbar"
+          :multi-line="true"
+          :timeout="-1"
+          color="error"
+          dark
+      >
+        {{ error }}
 
-      <template v-slot:action="{ attrs }">
-        <v-btn
-            dark
-            text
-            v-bind="attrs"
-            @click="closeError"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+        <template v-slot:action="{ attrs }">
+          <v-btn
+              dark
+              text
+              v-bind="attrs"
+              @click="closeError"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
     </div>
   </v-app>
 </template>
@@ -121,13 +121,13 @@ export default {
     }
   },
   computed: {
-    error () {
+    error() {
       return this.$store.getters.error
     },
-    isUserLoggedIn () {
+    isUserLoggedIn() {
       return this.$store.getters.isLoggedIn
     },
-    links () {
+    links() {
       if (this.$store.getters.isLoggedIn) {
         return [
           {text: 'Orders', icon: 'mdi-bookmark-outline', url: '/orders'},
@@ -143,10 +143,10 @@ export default {
     }
   },
   methods: {
-    closeError () {
+    closeError() {
       this.$store.dispatch('clearError')
     },
-    onLogout () {
+    onLogout() {
       this.$store.dispatch('onUserLogout')
       if (this.$route.name !== 'home') {
         this.$router.push('/')
@@ -157,7 +157,7 @@ export default {
 </script>
 
 <style scoped>
-  .pointer {
-    cursor: pointer;
-  }
+.pointer {
+  cursor: pointer;
+}
 </style>
