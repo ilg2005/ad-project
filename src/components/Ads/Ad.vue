@@ -32,12 +32,7 @@
                 :ad="currentAd"
                 v-if="isOwner"
             ></EditModal>
-
-            <v-btn
-                color="success"
-            >
-              Buy
-            </v-btn>
+            <buy-modal :ad="currentAd"></buy-modal>
           </v-card-actions>
         </v-card>
         <div v-else>
@@ -61,8 +56,10 @@
 
 <script>
 import EditModal from "@/components/Ads/EditModal";
+import BuyModal from "@/components/User/BuyModal";
 export default {
   components: {
+    BuyModal,
     EditModal
   },
   props: ['id'],

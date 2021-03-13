@@ -4,6 +4,7 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import router from './router/index';
 import * as firebase from 'firebase/firebase'
+import buy from '@/components/User/BuyModal'
 
 Vue.config.productionTip = false
 
@@ -30,6 +31,7 @@ new Vue({
   router,
   store,
   firebase,
+  buy,
   render: h => h(App),
 }).$mount('#app')
 

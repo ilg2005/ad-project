@@ -7,6 +7,7 @@
           color="orange"
           v-bind="attrs"
           v-on="on"
+          class="mr-4"
       >
         Edit
       </v-btn>

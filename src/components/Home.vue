@@ -55,13 +55,8 @@
               >
                 Open
               </v-btn>
+              <buy-modal :ad="ad"></buy-modal>
 
-              <v-btn
-                  color="primary"
-                  elevation="12"
-              >
-                Buy
-              </v-btn>
             </v-card-actions>
           </v-card>
           <br>
@@ -86,7 +81,9 @@
 </template>
 
 <script>
+import BuyModal from "@/components/User/BuyModal";
 export default {
+  components: {BuyModal},
   computed: {
     promoAds () {
       return this.$store.getters.promoAds
