@@ -55,7 +55,10 @@
               >
                 Open
               </v-btn>
-              <buy-modal :ad="ad"></buy-modal>
+              <buy-modal
+                  v-if="isUser"
+                  :ad="ad"
+              ></buy-modal>
 
             </v-card-actions>
           </v-card>
@@ -93,8 +96,11 @@ export default {
     },
     loading () {
       return this.$store.getters.loading
+    },
+    isUser () {
+      return this.$store.getters.isLoggedIn
     }
-  }
+  },
 }
 </script>
 
