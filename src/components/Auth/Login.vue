@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card class="mx-auto mt-5 elevation-12 col-sm-6">
+    <v-card class="mx-auto mt-5 elevation-12 col-sm-4">
       <v-card-title class="pa-3 mb-5 info white--text">
         <h1 class="display-1">Login</h1>
       </v-card-title>
